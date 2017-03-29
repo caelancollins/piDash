@@ -1,0 +1,19 @@
+import RPi.GPIO as GPIO
+from lxml import html
+import requests
+
+page = requests.get('http://janakmalla.com')
+result = html.fromstring(page.content)
+
+answer = result.xpath('//title/text()')
+
+if answer == ['Janak Mala :: Home']:
+    var = True
+else:
+    var = False
+
+PIO.setmode(GPIO.BCM)
+PIO.setup(18,GPIO.OUT)
+
+if var == True:
+    GPIO.output(18,True)
