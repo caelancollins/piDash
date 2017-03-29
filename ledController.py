@@ -7,7 +7,7 @@ result = html.fromstring(page.content)
 
 answer = result.xpath('//title/text()')
 
-if answer == ['Janak Mala :: Home']:
+if answer == ['Janak Malla :: Home']:
     var = True
 else:
     var = False
