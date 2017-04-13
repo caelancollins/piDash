@@ -24,7 +24,6 @@ while True:
         UDP_PORT = addr[1]
 
 
-
     #temporary (manual) latitude and longitude values
     latitude = 36.165888518000486
     longitude = -86.78443999499967
