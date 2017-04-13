@@ -25,7 +25,16 @@ sock.sendto(latitude, (ADDRESS,PORT))
 sock.sendto(longitude, (ADDRESS,PORT))
 
 
-while True:
-     data, addr = sock.recvfrom(1024) # buffer size is 1024 bytes
-     print "received message:", data
+#while True:
+data, addr = sock.recvfrom(1024) # buffer size is 1024 bytes
+print "received weather message:", data
 
+
+
+#for baseball game data
+OTHER_PORT = 3000
+
+sock.sendto("baseball", (ADDRESS, OTHER_PORT))
+
+data, addr = sock.recvfrom(1024)
+print "received score of last baseball game:", data
