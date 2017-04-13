@@ -1,6 +1,4 @@
-#Weather Scraper
-#Takes in two UDP packets containing latitude and longitude data
-#Returns one UDP packet containing 1-2 word description of weather
+#this is a sample file
 
 from bs4 import BeautifulSoup
 import socket
