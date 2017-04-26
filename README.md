@@ -21,7 +21,7 @@ Implemented Technologies: _As of April 13_
 * RaspianOS on a RaspberryPi 2 Model B  
 * Python web scraper  
 * A python client-server UDP connection between the Pi and an Amazon EC2 Instance
-  * The pi scrapes an IP locator website (https://www.iplocation.net) to send the current latitude and longitude via UDP packets to the Amazon EC2. The EC2 instance then receives the location and can return information based on it. Currently it is set to return weather information via UDP Packets. An RGB LED on the pi returns a different color based on the weather for the day. 
+  * The pi scrapes an IP locator website (https://www.iplocation.net) to send the current latitude and longitude via UDP packets to the Amazon EC2. The EC2 instance then receives the location and can return information based on it. Currently it is set to return weather information via UDP Packets. An RGB LED on the pi returns a different color based on the weather for the day.
+  * The last score of the Vanderbilt Baseball team is also scraped and returned. An LED will be used to indicate a loss or a win. 
 * Proposed Ideas:
   * The EC2 Instance will have added scraping capabilities to return additional information to the Pi. 
-  * We are planning on adding Vanderbilt Baseball results as one such feature. 
