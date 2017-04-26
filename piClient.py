@@ -5,7 +5,7 @@ import RPi.GPIO as GPIO
 import time
 
 
-print("Testing LED")i
+print("Testing LED")
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
@@ -58,5 +58,15 @@ sock.sendto("stock", (ADDRESS, 4000))
 received, addr = sock.recvfrom(1024)
 print "Status of Dow:", received
 
-if received == "Dow is up":
+if received == "Dow is down":
     GPIO.output(18,GPIO.HIGH)
+    time.sleep(1)
+    GPIO.output(18,GPIO.LOW)
+
+formatted = data.split(': ')
+
+if formatted[1][0] ==  'L':
+    GPIO.setup(23,GPIO.OUT)
+    GPIO.output(23,GPIO.HIGH)
+    time.sleep(1)
+    GPIO.output(23, GPIO.LOW)
