@@ -38,3 +38,8 @@ sock.sendto("baseball", (ADDRESS, OTHER_PORT))
 
 data, addr = sock.recvfrom(1024)
 print "received score of last baseball game:", data
+
+sock.sendto("stock", (ADDRESS, 4000))
+
+recieved = sock.recvfrom(1024)
+print recieved
