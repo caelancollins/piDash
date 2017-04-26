@@ -56,6 +56,11 @@ while True:
     for game in reversed(all_games):
         my_date, opponent, score_or_time = game
         split_date = my_date.split("/")
+        #print(split_date)
+        #added to prevent error on game with non-existent date (wtf vandy)    
+        if len(my_date) < 4:
+            continue
+
         game_date = datetime.date(2000+int(split_date[2]), int(split_date[0]), int(split_date[1]))
        
         #for testing
