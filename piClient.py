@@ -2,10 +2,10 @@ from lxml import html
 import requests
 import socket
 
-page = requests.get('https://geoiptool.com')
+page = requests.get('http://www.geoiptool.net')
 result = html.fromstring(page.content)
 
-answer = result.xpath('//span/text()')
+answer = result.xpath('//td/text()')
 
 PORT = 2000
 ADDRESS = socket.gethostbyname("ec2-54-242-241-35.compute-1.amazonaws.com")
@@ -14,9 +14,9 @@ loc = []
 longitude = ""
 latitude = ""
 for i in range(0,len(answer)):
-	if answer[i] == "Latitude:":
+	if answer[i] == "Latitude":
 		latitude=answer[i+1]
-	if answer[i] == "Longitude:":
+	if answer[i] == "Longitude":
 		longitude=answer[i+1]
 
 
