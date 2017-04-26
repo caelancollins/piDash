@@ -1,6 +1,20 @@
 from lxml import html
 import requests
 import socket
+import RPi.GPIO as GPIO
+import time
+
+
+print("Testing LED")i
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
+GPIO.setup(18,GPIO.OUT)
+print "LED on"
+GPIO.output(18,GPIO.HIGH)
+time.sleep(1)
+print "LED off"
+GPIO.output(18,GPIO.LOW)
 
 page = requests.get('http://www.geoiptool.net')
 result = html.fromstring(page.content)
@@ -41,5 +55,8 @@ print "received score of last baseball game:", data
 
 sock.sendto("stock", (ADDRESS, 4000))
 
-recieved = sock.recvfrom(1024)
-print recieved
+received, addr = sock.recvfrom(1024)
+print "Status of Dow:", received
+
+if received == "Dow is up":
+    GPIO.output(18,GPIO.HIGH)
