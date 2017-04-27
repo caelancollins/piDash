@@ -5,6 +5,13 @@ import RPi.GPIO as GPIO
 import time
 
 
+#create booleans for data representation
+dow_up = False
+raining = False
+baseball_win = False
+
+
+
 page = requests.get('http://www.geoiptool.net')
 result = html.fromstring(page.content)
 
@@ -19,6 +26,9 @@ for i in range(0,len(answer)):
 	if answer[i] == "Longitude":
 		longitude=answer[i+1]
 
+
+
+#weather
 WEATHER_PORT = 2000
 ADDRESS = socket.gethostbyname("ec2-54-242-241-35.compute-1.amazonaws.com")
 
@@ -32,6 +42,9 @@ data, addr = sock.recvfrom(1024) # buffer size is 1024 bytes
 print "received weather message:", data
 
 
+if "rain" in data:
+	raining = True
+
 
 #for baseball game data
 BASEBALL_PORT = 3000
@@ -41,25 +54,44 @@ sock.sendto("baseball", (ADDRESS, BASEBALL_PORT))
 data, addr = sock.recvfrom(1024)
 print data
 
+
+formatted = data.split(': ')
+if formatted[1][0] ==  'L':
+	baseball_win = False
+
+
+
+#for stock market data
 DOW_PORT = 4000
 sock.sendto("stock", (ADDRESS, DOW_PORT))
 
 received, addr = sock.recvfrom(1024)
 print "Status of Dow:", received
 
+if received == "Dow is down":
+	dow_up = False
+
+
+
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO.setup(18,GPIO.OUT)
+GPIO.setup(23,GPIO.OUT)
 
-if received == "Dow is down":
+
+
+
+if not dow_up: #lights up if dow is down
     GPIO.output(18,GPIO.HIGH)
     time.sleep(1)
     GPIO.output(18,GPIO.LOW)
+   
 
-formatted = data.split(': ')
-
-if formatted[1][0] ==  'L':
-    GPIO.setup(23,GPIO.OUT)
+if not baseball_win: #lights up if vandy lost
     GPIO.output(23,GPIO.HIGH)
     time.sleep(1)
     GPIO.output(23, GPIO.LOW)
+
+
+if not raining: #lights up if it is not raining
+
