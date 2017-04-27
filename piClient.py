@@ -77,6 +77,11 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO.setup(18,GPIO.OUT)
 GPIO.setup(23,GPIO.OUT)
+GPIO.setup(12,GPIO.OUT)
+GPIO.setup(25,GPIO.OUT)
+GPIO.setup(16,GPIO.OUT)
+
+
 
 
 
@@ -85,13 +90,21 @@ if not dow_up: #lights up if dow is down
     GPIO.output(18,GPIO.HIGH)
     time.sleep(1)
     GPIO.output(18,GPIO.LOW)
-   
+
 
 if not baseball_win: #lights up if vandy lost
     GPIO.output(23,GPIO.HIGH)
     time.sleep(1)
     GPIO.output(23, GPIO.LOW)
 
+GPIO.output(16,GPIO.HIGH)
+time.sleep(1)
+GPIO.output(16, GPIO.LOW)
 
-if not raining: #lights up if it is not raining
+GPIO.output(12,GPIO.HIGH)
+time.sleep(1)
+GPIO.output(12, GPIO.LOW)
 
+GPIO.output(25,GPIO.HIGH)
+time.sleep(1)
+GPIO.output(25, GPIO.LOW)
