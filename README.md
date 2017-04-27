@@ -1,11 +1,21 @@
 # piDash
-CS4283 Computer Networks Final Project   
+CS4283 Computer Networks Final Project     
 
-Dates:
+Final Functionality:  
+* A LED Dashboard connected to a RaspberryPi with the following LED notifications: 
+  * A RGB LED representing the current weather that turns blue when rain is in the forecast, green for sunny days, and red for other. 
+  * A Yellow LED that lights up if Vanderbilt Baseball won their last game. 
+  * A Green LED that is lit if the Dow Jones Industrial Average is up on the day. 
 
-* March 28: Feasibility Study
-* April 13: Work in Progress
-* April 27: Final Code and Video Submission  
+Implemented Technologies: 
+* RaspianOS on a RaspberryPi 2 Model B  
+* 4 Python web scrapers  
+* A python client-server UDP connection between the Pi and an Amazon EC2 Instance
+  * The pi scrapes an IP locator website ~~(https://www.iplocation.net)~~ (https://www.geoiptool.net -- the old website lost its certificate) to send the current latitude and longitude via UDP packets to the Amazon EC2 Instance. 
+  * The EC2 instance receives the location and returns the weather information via UDP Packets. 
+  * The last score of the Vanderbilt Baseball team is scraped and returned.
+  * The current status of the Dow Jones industrial average is scraped and returned. 
+  * The EC2 Instance will have added scraping capabilities to return additional information to the Pi. 
 
 Feasibility Study:  
 * After installing the RaspianOS on the Raspberry Pi, we have set up a very basic LED display using a breadboard.  
@@ -14,14 +24,8 @@ Feasibility Study:
 
 * If the scraper returns true, the light is turned on. Otherwise it is kept off. (We negated the result for testing).  
 
+Dates:  
 
-Final Desired Functionality: _TBD_  
-
-Implemented Technologies: _As of April 13_ 
-* RaspianOS on a RaspberryPi 2 Model B  
-* Python web scraper  
-* A python client-server UDP connection between the Pi and an Amazon EC2 Instance
-  * The pi scrapes an IP locator website (https://www.iplocation.net) to send the current latitude and longitude via UDP packets to the Amazon EC2. The EC2 instance then receives the location and can return information based on it. Currently it is set to return weather information via UDP Packets. An RGB LED on the pi returns a different color based on the weather for the day.
-  * The last score of the Vanderbilt Baseball team is also scraped and returned. An LED will be used to indicate a loss or a win. 
-* Proposed Ideas:
-  * The EC2 Instance will have added scraping capabilities to return additional information to the Pi. 
+* March 28: Feasibility Study
+* April 13: Work in Progress
+* April 27: Final Code and Video Submission
