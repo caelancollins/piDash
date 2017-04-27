@@ -8,6 +8,8 @@ import time
 #create booleans for data representation
 dow_up = False
 raining = False
+sunny = False
+other = False
 baseball_win = False
 
 
@@ -42,8 +44,17 @@ data, addr = sock.recvfrom(1024) # buffer size is 1024 bytes
 print "received weather message:", data
 
 
-if "rain" in data:
+if "Rain" in data or "Showers" in data or "T-storms" in data:
 	raining = True
+	sunny = False
+	other = False
+#"Clouds" only occurs in the description of "A Few Clouds" i.e. sunny
+if "Sun" in data or "Sunny" in data or "Fair" in data or "Clouds" in data:
+	sunny = True
+	raining = False
+	other = False
+else: 
+	other = True 
 
 
 #for baseball game data
@@ -97,14 +108,17 @@ if not baseball_win: #lights up if vandy lost
     time.sleep(1)
     GPIO.output(23, GPIO.LOW)
 
-GPIO.output(16,GPIO.HIGH)
-time.sleep(1)
-GPIO.output(16, GPIO.LOW)
+if sunny: 
+	GPIO.output(16,GPIO.HIGH)
+	time.sleep(1)
+	GPIO.output(16, GPIO.LOW)
 
-GPIO.output(12,GPIO.HIGH)
-time.sleep(1)
-GPIO.output(12, GPIO.LOW)
+if raining: 
+	GPIO.output(12,GPIO.HIGH)
+	time.sleep(1)
+	GPIO.output(12, GPIO.LOW)
 
-GPIO.output(25,GPIO.HIGH)
-time.sleep(1)
-GPIO.output(25, GPIO.LOW)
+if other:
+	GPIO.output(25,GPIO.HIGH)
+	time.sleep(1)
+	GPIO.output(25, GPIO.LOW)
